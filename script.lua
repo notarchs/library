@@ -323,8 +323,8 @@ sec3:Button("Server Hop", function()
     end
 
     if not instanceid then
-        for i = 1,100 do
-            local num = math.random(1, 100)
+        for i = 1,10 do
+            local num = math.random(1, 10)
             if api.data[num].playing ~= 32 then
                 instanceid = api.data[num].id;
                 break;
@@ -336,7 +336,7 @@ sec3:Button("Server Hop", function()
         Teleport:TeleportToPlaceInstance(game.PlaceId, instanceid, LocalPlayer)
     end
     
-        syn.queue_on_teleport(loadstring(game:HttpGet("https://pastebin.com/gv6pSCEH"))())
+        syn.queue_on_teleport(loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))())
 end)
 
 --------------------
@@ -392,7 +392,7 @@ sec4:Button("Injury Removal", function(removeinjury)
 end)
 
 sec4:Button("Load Sharingan Spec", function(shariganspec)
-    loadstring(game:HttpGet("https://pastebin.com/NaP20JLJ"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/sharinganspec.lua"))()
 end)
 
 local tab5 = win:Tab("Items")
