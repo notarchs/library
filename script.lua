@@ -443,3 +443,26 @@ sec5b:Button("Activate Item", function(itemdropdown)
     end;
 end;
 end)
+
+local tab6 = win:Tab("Stats")
+
+local sec6 = tab6:Section("Info")
+
+local labelhealth = sec6:Label("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
+local labelstam = sec6:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+local labelstrength = sec6:Label("Strength: ")
+local labelmoney = sec6:Label("Money: ")
+
+local sec6b = tab6:Section("Stats")
+
+local labeldura = sec6b:Label("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
+local labelstamstat = sec6b:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+
+while true do 
+    wait()
+    labelhealth:Set("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
+    labelstam:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+    labeldura:Set("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
+    labelstamstat:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+
+end
