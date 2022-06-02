@@ -188,12 +188,13 @@ sec2:Toggle("Autofarm Strength", false,"Toggle",function(SparRisk)
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
 local ws = game:GetService("Workspace")
+local Stamina = game:GetService("Players").LocalPlayer.Character.Stamina
 -- tools 
 local Tools = {"Spar Training $190", "Spar Training"}
 -- to make loop work
 shared.sparRisky = SparRisk
 -- functionality
-while shared.sparRisky do
+while shared.sparRisky and wait() do
     wait(0.1)
        if not plr.Backpack:FindFirstChild(Tools[2]) and shared.sparRisky and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Right") and not ws.Live:WaitForChild(plr.Name):FindFirstChild(Tools[2]) then
            fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
@@ -214,17 +215,8 @@ while shared.sparRisky do
 end)
 
 sec2:Toggle("Auto Dura", false,"Toggle",function(AutoDura)
-    if AutoDura == true then
-        dura = true
-        else
-        dura = false
-    end
-    
-    while dura == true do
-        if dura == false
-    then
-        break
-    end
+    shared.duraFarm = AutoDura
+   while shared.duraFarm and wait() do
     fireclickdetector(game:GetService("Workspace").Shop["Self Punch $130"].Head.ClickDetector)
     wait()
     local player = game.Players.LocalPlayer
@@ -413,6 +405,10 @@ end
 end
 end)
 
-sec5b:Button("Buy item", function(test)
-    
+sec5b:Button("Activate Item", function(itemdropdown)
+    for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+    if v.Name == itemdropdown then
+        v.Parent = game.Players.LocalPlayer.Character
+    end;
+end;
 end)
