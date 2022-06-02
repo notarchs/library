@@ -183,7 +183,17 @@ sec2:Toggle("Toggle to punch", false,"Toggle",function(Togglepunch)
 end;
 end)
 
-sec2:Toggle("Autofarm Strength", false,"Toggle",function(SparRisk)
+sec2:Toggle("SHOCKWAVE SIMULATOR", false,"Toggle",function(shockwave)
+    shared.dropKick = shockwave
+    while shared.dropKick and wait() do
+            wait(0.17)
+game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(true, "DropKick")    
+end
+end)
+
+local sec2b = tab2:Section("Risky Farms")
+
+sec2b:Toggle("Autofarm Strength", false,"Toggle",function(SparRisk)
     local plr = game:GetService("Players").LocalPlayer
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
@@ -218,7 +228,7 @@ while shared.sparRisky and wait() do
 end
 end)
 
-sec2:Toggle("Auto Dura", false,"Toggle",function(AutoDura)
+sec2b:Toggle("Auto Dura", false,"Toggle",function(AutoDura)
     shared.duraFarm = AutoDura
    while shared.duraFarm and wait() do
     fireclickdetector(game:GetService("Workspace").Shop["Self Punch $130"].Head.ClickDetector)
@@ -265,20 +275,14 @@ end
 fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].Head.ClickDetector)
 end)
 
-sec2:Toggle("SHOCKWAVE SIMULATOR", false,"Toggle",function(shockwave)
-    shared.dropKick = shockwave
-    while shared.dropKick and wait() do
-            wait(0.17)
-game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(true, "DropKick")    
-end
-end)
+local sec2c = tab2:Section("Other Risky Stuff")
 
-sec2:Slider("Walkspeed",0,200,24,1,"Slider", function(walkslider)
+sec2c:Slider("Walkspeed",0,200,24,1,"Slider", function(walkslider)
   print(walkslider)
   shared.walkSpeed = walkslider
 end)
 
-sec2:Toggle("Walkspeed Toggle", false, "Toggle", function(walktoggle)
+sec2c:Toggle("Walkspeed Toggle", false, "Toggle", function(walktoggle)
 shared.walkToggle = walktoggle
 
 while shared.walkToggle and wait() do
@@ -322,13 +326,9 @@ sec3:Button("Reset Output", function(resetoutput)
     game.Players.LocalPlayer.Backpack.sTraits.Power:FireServer(tonumber(100))
 end)
 
---------------------
+local sec3b = tab3:Section("Fun Stuff")
 
-local tab4 = win:Tab("Fun")
-
-local sec4 = tab4:Section("Fun stuff")
-
-sec4:Button("Destroy Face", function(destroyface)
+sec3b:Button("Destroy Face", function(destroyface)
     ArchsUI:Notification("Fun Features :P", "Destroying Face...")
     wait(1)
     local player = game.Players.LocalPlayer
@@ -339,7 +339,7 @@ ArchsUI:Notification("Fun Features :P", "Face Destroyed!")
 end
 end)
 
-sec4:Button("Destroy Pupils", function(destroypupils)
+sec3b:Button("Destroy Pupils", function(destroypupils)
     ArchsUI:Notification("Fun Features :P", "Destroying Pupils...")
     wait(1)
     local player = game.Players.LocalPlayer
@@ -350,41 +350,43 @@ ArchsUI:Notification("Fun Features :P", "Pupils Destroyed!")
 end
 end)
 
-sec4:Button("Headless", function(headless)
-     ArchsUI:Notification("Fun Features :P", "Removing Head...")
+sec3b:Button("Headless", function(headless)
+    ArchsUI:Notification("Fun Features :P", "Removing Head...")
+   wait(1)
+   local player = game.Players.LocalPlayer
+   local char = player.Character
+   ArchsUI:Notification("Fun Features :P", "Head Removed!")
+   for i,v in pairs(char:GetChildren()) do
+   if v:FindFirstChild("Head") then 
+   v.Parent = nil
+end
+end
+end)
+
+sec3b:Button("Injury Removal", function(removeinjury)
+    ArchsUI:Notification("Fun Features :P", "Removing Injuries...")
     wait(1)
-    local player = game.Players.LocalPlayer
-    local char = player.Character
-    ArchsUI:Notification("Fun Features :P", "Head Removed!")
-    for i,v in pairs(char:GetChildren()) do
-    if v:FindFirstChild("Head") then 
-    v.Parent = nil
-end
-end
-end)
-
-sec4:Button("Injury Removal", function(removeinjury)
-     ArchsUI:Notification("Fun Features :P", "Removing Injuries...")
-     wait(1)
-     for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-    if v:IsA("Part") then
-        if v:FindFirstChild("Injury") then
-            v.Injury:Destroy()
-        end;
-    end;
+    for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+   if v:IsA("Part") then
+       if v:FindFirstChild("Injury") then
+           v.Injury:Destroy()
+       end;
+   end;
 end;
-    
+   
 end)
 
-sec4:Button("Load Sharingan Spec", function(shariganspec)
+sec3b:Button("Load Sharingan Spec", function(shariganspec)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/sharinganspec.lua"))()
 end)
 
-local tab5 = win:Tab("Items")
+--------------------
 
-local sec5 = tab5:Section("Item List")
+local tab4 = win:Tab("Items")
 
-sec5:Button("Spar Training", function(buyspar)
+local sec4 = tab4:Section("Item List")
+
+sec4:Button("Spar Training", function(buyspar)
 local plr = game:GetService("Players").LocalPlayer
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
@@ -395,7 +397,7 @@ local Tools = {"Spar Training $190", "Spar Training"}
     fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
 end)
 
-sec5:Button("Self Punch", function(buyselfpunch)
+sec4:Button("Self Punch", function(buyselfpunch)
     local plr = game:GetService("Players").LocalPlayer
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
@@ -406,7 +408,7 @@ local Tools = {"Self Punch $130", "Self Punch"}
     fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
 end)
 
-sec5:Button("Durability Training", function(buyduratraining)
+sec4:Button("Durability Training", function(buyduratraining)
     local plr = game:GetService("Players").LocalPlayer
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
@@ -417,46 +419,38 @@ local Tools = {"Durability Training $130", "Durability Training"}
     fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
 end)
 
-local sec5b = tab5:Section("Dropdown")
+local sec4b = tab4:Section("Dropdown")
 
-sec5b:Dropdown("Item List", {"Spar Training","Self Punch","Durability Training","Shadow Training","Protein Bar"},"","Dropdown", function(itemdropdown)
-  local Tools = {"Durability Training $130", "Durability Training", "Spar Training $190", "Spar Training"}
+sec4b:Dropdown("Item List", {"Spar Training","Self Punch","Durability Training","Shadow Training","Protein Bar"},"","Dropdown", function(itemdropdown)
     local plr = game:GetService("Players").LocalPlayer
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
 local ws = game:GetService("Workspace")
+  shared.selectedItem = itemdropdown
   
-  if itemdropdown == "Spar Training" then do
-      fireclickdetector(ws.Shop[Tools[3]].Head.ClickDetector)
-    if itemdropdown == "Durability Training" then do
-        fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
-end
-end
-end
-end
 end)
 
-sec5b:Button("Activate Item", function(itemdropdown)
+sec4b:Button("Activate Item", function(itemactivate)
     for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-    if v.Name == itemdropdown then
+    if v.Name == shared.selectedItem then
         v.Parent = game.Players.LocalPlayer.Character
     end;
 end;
 end)
 
-local tab6 = win:Tab("Stats")
+local tab5 = win:Tab("Stats")
 
-local sec6 = tab6:Section("Info")
+local sec5 = tab5:Section("Info")
 
-local labelhealth = sec6:Label("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
-local labelstam = sec6:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
-local labelstrength = sec6:Label("Strength: ")
-local labelmoney = sec6:Label("Money: ")
+local labelhealth = sec5:Label("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
+local labelstam = sec5:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+local labelstrength = sec5:Label("Strength: ")
+local labelmoney = sec5:Label("Money: ")
 
-local sec6b = tab6:Section("Stats")
+local sec5b = tab5:Section("Stats")
 
-local labeldura = sec6b:Label("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
-local labelstamstat = sec6b:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+local labeldura = sec5b:Label("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
+local labelstamstat = sec5b:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
 
 while true do 
     wait()
@@ -466,3 +460,32 @@ while true do
     labelstamstat:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
 
 end
+
+local tab6 = win:Tab("Stats")
+
+local sec6 = tab6:Section("Info")
+
+sec6:Button("Poppa Tatoes", function(gotopoppa)
+
+local poppa_location = {
+    door = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625)
+}
+
+local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+function bypass_ken_shitanticheat(v)
+if lp.Character and
+lp.Character:FindFirstChild('HumanoidRootPart') then
+
+    local cf = Cframe.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{Cframe=cf})
+
+    a:Play()
+end
+end
+
+bypass_ken_shitanticheat(poppa_location.door)
+end)
