@@ -499,8 +499,8 @@ sec6b:Button("Poppa Tatoes", function(gotopoppa)
     bypass_ken_shitanticheat(poppa_location.door)
 end)
 
-sec6b:Dropdown("Teleport Location",  ,function(teleportdropdown)
+--[[sec6b:Dropdown("Teleport Location",  ,function(teleportdropdown)
 
-end)
+end)--]]
 
 Refresh_Stats()
