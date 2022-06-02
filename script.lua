@@ -262,15 +262,8 @@ fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].
 end)
 
 sec2:Toggle("SHOCKWAVE SIMULATOR", false,"Toggle",function(shockwave)
-    if shockwave == true then
-      doshock = true
-      else
-         doshock = false
-     end
-  while doshock == true do
-            if doshock == false then
-            break
-            end
+    shared.dropKick = shockwave
+    while shared.dropKick and wait() do
             wait(0.17)
 game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(true, "DropKick")    
 end
