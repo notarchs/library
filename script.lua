@@ -452,40 +452,51 @@ local sec5b = tab5:Section("Stats")
 local labeldura = sec5b:Label("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
 local labelstamstat = sec5b:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
 
+function Refresh_Stats()
 while true do 
     wait()
     labelhealth:Set("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
     labelstam:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
     labeldura:Set("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
     labelstamstat:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
-
 end
+end
+
+---
 
 local tab6 = win:Tab("Teleports")
 
-local sec6 = tab6:Section("Shops")
+local sec6 = tab6:Section("Config")
 
-sec6:Button("Poppa Tatoes", function(gotopoppa)
-
-local poppa_location = {
-    door = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625)
-}
-
-local tween_s = game:GetService('TweenService')
-local tweeninfo = TweenInfo.new(1,Enum.EasingStyle.Linear)
-
-local lp = game.Players.LocalPlayer
-
-function bypass_ken_shitanticheat(v)
-if lp.Character and
-lp.Character:FindFirstChild('HumanoidRootPart') then
-
-    local cf = Cframe.new(v)
-    local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{Cframe=cf})
-
-    a:Play()
-end
-end
-
-bypass_ken_shitanticheat(poppa_location.door)
+sec6:Slider("Tween Speed (Higher = Slower)", 1, 10, 1, 1, "Slider", function(tweenspeed)
+    shared.tweenSpeed = tweenspeed
 end)
+
+local sec6b = tab6:Section("Shops")
+
+sec6b:Button("Poppa Tatoes", function(gotopoppa)
+
+    local poppa_location = {
+        door = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625)
+    }
+    
+    local tween_s = game:GetService('TweenService')
+    local tweeninfo = TweenInfo.new(shared.tweenSpeed,Enum.EasingStyle.Linear)
+    
+    local lp = game.Players.LocalPlayer
+    
+    function bypass_ken_shitanticheat(v)
+    if lp.Character and
+    lp.Character:FindFirstChild('HumanoidRootPart') then
+    
+        local cf = CFrame.new(v)
+        local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    
+        a:Play()
+    end
+    end
+    
+    bypass_ken_shitanticheat(poppa_location.door)
+end)
+
+Refresh_Stats()
