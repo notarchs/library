@@ -199,11 +199,11 @@ while shared.sparRisky do
            fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
            plr.Backpack:WaitForChild(Tools[2], 5)
        hum:EquipTool(plr.Backpack:FindFirstChild(Tools[2]))
-       mouse1click()
+       Char:FindFirstChild("Spar Training"):Activate()
        hum:EquipTool(plr.Backpack:WaitForChild("Basic Combat", 1))
        elseif plr.Backpack:FindFirstChild(Tools[2]) and not Char:FindFirstChild("Right") then
            hum:EquipTool(plr.Backpack:FindFirstChild(Tools[2]))
-       mouse1click()
+       Char:FindFirstChild("Spar Training"):Activate()
        wait(0.5)
        hum:EquipTool(plr.Backpack:WaitForChild("Basic Combat", 1))
        elseif Char:FindFirstChild("Right") then
