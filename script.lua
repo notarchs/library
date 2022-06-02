@@ -176,23 +176,11 @@ sec2:Bind("Hold to punch", Enum.KeyCode.Z, true, "BindHold", function(Holdpunch)
 end)
 
 sec2:Toggle("Toggle to punch", false,"Toggle",function(Togglepunch)
-     if Togglepunch == true then
-      dopunch = true
-      else
-         dopunch = false
-     end
-  while dopunch == true do
-             if dopunch == false then
-            break
-            end
-      local args = {
-    [1] = true,
-    [2] = 1
-    }
-     
-     wait(0.16)
-         game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(unpack(args))
-  end
+    shared.punchTog = Togglepunch
+
+    while shared.punchTog and wait(.16) do
+    game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(true, 1)
+end;
 end)
 
 sec2:Toggle("Autofarm Strength", false,"Toggle",function(SparRisk)
