@@ -1,3 +1,5 @@
+repeat wait() until game:IsLoaded()
+
 local ArchsUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/lib.lua"))()
 
 --[[ArchsUI:New({
@@ -312,31 +314,11 @@ local sec3 = tab3:Section("Misc stuff")
 sec3:Button("Server Hop", function()
     ArchsUI:Notification("Server Hop", "Swapping Servers...")
     wait(2)
-    local Teleport = game:GetService('TeleportService')
-     syn.set_thread_identity(6)
-     local api = game:GetService("HttpService"):JSONDecode(game:HttpGetAsync("https://games.roblox.com/v1/games/2898237081/servers/Public?sortOrder=Asc&limit=100"))
-    math.randomseed(tick())
-    local instanceid;
-     local num = math.random(1, 100)
-    if api.data[num].playing ~= 32 then
-        instanceid = api.data[num].id;
-    end
-
-    if not instanceid then
-        for i = 1,10 do
-            local num = math.random(1, 10)
-            if api.data[num].playing ~= 32 then
-                instanceid = api.data[num].id;
-                break;
-            end
-        end
-    end
+    game:GetService('TeleportService'):Teleport(game.PlaceId)
     
-    if instanceid then
-        Teleport:TeleportToPlaceInstance(game.PlaceId, instanceid, LocalPlayer)
-    end
-    
-        syn.queue_on_teleport(loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))())
+    syn.queue_on_teleport(
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))()
+    )
 end)
 
 --------------------
@@ -383,11 +365,13 @@ end)
 sec4:Button("Injury Removal", function(removeinjury)
      ArchsUI:Notification("Fun Features :P", "Removing Injuries...")
      wait(1)
-     local player = game.Players.LocalPlayer
-    local char = player.Character
-    if char:FindFirstChild("Head") and char:FindFirstChild("Head"):FindFirstChild("Injury") then
-    char.Head:FindFirstChild("Injury"):Destroy()
-    end
+     for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    if v:IsA("Part") then
+        if v:FindFirstChild("Injury") then
+            v.Injury:Destroy()
+        end;
+    end;
+end;
     
 end)
 
