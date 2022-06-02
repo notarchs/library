@@ -217,17 +217,7 @@ end)
 sec2:Toggle("Auto Dura", false,"Toggle",function(AutoDura)
     shared.duraFarm = AutoDura
    while shared.duraFarm and wait() do
-    fireclickdetector(game:GetService("Workspace").Shop["Self Punch $130"].Head.ClickDetector)
-    wait()
-    local player = game.Players.LocalPlayer
-    local char = player.Character
-for _,c in pairs(player.Character:GetDescendants())do
-if c:IsA("BasePart") then
-c.Anchored = true
-end
-end
-
-fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].Head.ClickDetector)
+       fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].Head.ClickDetector)
 
 player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Durability Training"))
 player.Character:FindFirstChild("Durability Training"):Activate()
@@ -259,6 +249,14 @@ end
 end
 
 fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].Head.ClickDetector)
+    local player = game.Players.LocalPlayer
+    local char = player.Character
+for _,c in pairs(player.Character:GetDescendants())do
+if c:IsA("BasePart") then
+c.Anchored = true
+end
+end
+
 end)
 
 sec2:Toggle("SHOCKWAVE SIMULATOR", false,"Toggle",function(shockwave)
