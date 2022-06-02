@@ -312,13 +312,14 @@ local tab3 = win:Tab("Misc")
 local sec3 = tab3:Section("Misc stuff")
 
 sec3:Button("Server Hop", function()
-    ArchsUI:Notification("Server Hop", "Swapping Servers...")
-    wait(2)
-    game:GetService('TeleportService'):Teleport(game.PlaceId)
-    
-    syn.queue_on_teleport(
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))()
-    )
+   ArchsUI:Notification("Server Hop", "Swapping Servers...") wait(2)
+
+game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
+repeat wait() until game:IsLoaded() 
+    syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))()')
+end); 
+wait(.5)
+game:GetService('TeleportService'):Teleport(game.PlaceId)
 end)
 
 --------------------
