@@ -468,7 +468,7 @@ local tab6 = win:Tab("Teleports")
 
 local sec6 = tab6:Section("Config")
 
-sec6:Slider("Tween Speed (Higher = Slower)", 1, 10, 1, 1, "Slider", function(tweenspeed)
+sec6:Slider("Tween Speed (Higher = Slower)", 1, 4, 1, 1, "Slider", function(tweenspeed)
     shared.tweenSpeed = tweenspeed
 end)
 
