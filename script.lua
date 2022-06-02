@@ -191,19 +191,11 @@ local ws = game:GetService("Workspace")
 -- tools 
 local Tools = {"Spar Training $190", "Spar Training"}
 -- to make loop work
-if SparRisk == true then
-    SparRisky = true
-    else
-        SparRisky = false
-end
+shared.sparRisky = SparRisk
 -- functionality
-while SparRisky == true do
-    local args = {
-    [1] = true,
-    [2] = 1
-    }
+while shared.sparRisky do
     wait(0.1)
-       if not plr.Backpack:FindFirstChild(Tools[2]) and SparRisky == true and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Right") and not ws.Live:WaitForChild(plr.Name):FindFirstChild(Tools[2]) then
+       if not plr.Backpack:FindFirstChild(Tools[2]) and shared.sparRisky and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Right") and not ws.Live:WaitForChild(plr.Name):FindFirstChild(Tools[2]) then
            fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
            plr.Backpack:WaitForChild(Tools[2], 5)
        hum:EquipTool(plr.Backpack:FindFirstChild(Tools[2]))
@@ -215,11 +207,8 @@ while SparRisky == true do
        wait(0.5)
        hum:EquipTool(plr.Backpack:WaitForChild("Basic Combat", 1))
        elseif Char:FindFirstChild("Right") then
-           wait(0.18)
-           game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(unpack(args))
-       if SparRisky == false then
-           break
-       end
+           wait(0.16)
+           game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(true, 1)
    end
     end
 end)
