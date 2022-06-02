@@ -461,9 +461,9 @@ while true do
 
 end
 
-local tab6 = win:Tab("Stats")
+local tab6 = win:Tab("Teleports")
 
-local sec6 = tab6:Section("Info")
+local sec6 = tab6:Section("Shops")
 
 sec6:Button("Poppa Tatoes", function(gotopoppa)
 
