@@ -307,13 +307,19 @@ sec3:Textbox("Power Output", false, function(poweroutput)
 end)
 
 sec3:Toggle("Force Output", false, "Toggle", function(forceoutput)
-shared.forceOutput = forceOutput
+shared.forceOutput = forceoutput
+print(shared.forceOutput)
 while shared.forceOutput and wait() do
     wait(0.2)
     game.Players.LocalPlayer.Character.Power.Value = shared.powerOutput
     game.Players.LocalPlayer.Backpack.sTraits.Power:FireServer(tonumber(shared.powerOutput))
 end
 
+end)
+
+sec3:Button("Reset Output", function(resetoutput)
+    game.Players.LocalPlayer.Character.Power.Value = 100
+    game.Players.LocalPlayer.Backpack.sTraits.Power:FireServer(tonumber(100))
 end)
 
 --------------------
