@@ -818,4 +818,91 @@ sec7b:Toggle("Enable Name ESP", false, "Toggle", function(enablenameesp)
 
 end)
 
+sec7b:Toggle("Enable Health ESP", false, "Toggle", function(enablehealthesp)
+
+    shared.healthEsp = enablehealthesp
+    local c = workspace.CurrentCamera
+    local ps = game:GetService("Players")
+    local lp = ps.LocalPlayer
+    local rs = game:GetService("RunService")
+
+    local function esphealth(p,cr)
+        local h = cr:WaitForChild("Humanoid")
+        local hrp = cr:WaitForChild("HumanoidRootPart")
+
+        local texthealth = Drawing.new("Text")
+        texthealth.Visible = shared.healthEsp
+        texthealth.Center = true
+        texthealth.Outline = true
+        texthealth.Font = 2
+        texthealth.Color = Color3.fromRGB(18, 247, 10)
+        texthealth.Size = 13
+
+        local c1
+        local c2
+        local c3
+
+        local function dc()
+            texthealth.Visible = false
+            texthealth:Remove()
+            if c1 then
+                c1:Disconnect()
+                c1 = nil
+            end
+            if c2 then
+                c2:Disconnect()
+                c2 = nil
+            end
+            if c3 then
+                c3:Disconnect()
+                c3 = nil
+            end
+        end
+
+        c2 = cr.AncestryChanged:Connect(function(_,parent)
+            if not parent then
+                dc()
+            end
+        end)
+
+        c3 = h.HealthChanged:Connect(function(v)
+            if (v<=0) or (h:GetState() == Enum.HumanoidStateType.Dead) then
+                dc()
+            end
+        end) 
+
+        c1 = rs.RenderStepped:Connect(function()
+            local hrp_pos,hrp_onscreen = c:WorldToViewportPoint(hrp.Position)
+            if hrp_onscreen then
+                local healthpercentage = (p.Character.Humanoid.Health / p.Character.Humanoid.MaxHealth) * 100 + 0.5
+                local health1 = (p.Character.Humanoid.Health) + 0.5
+                local health2 = (p.Character.Humanoid.MaxHealth) + 0.5
+                texthealth.Position = Vector2.new(hrp_pos.X, hrp_pos.Y + 30)
+                texthealth.Text = math.floor(health1).. " / ".. math.floor(health2).. " (".. math.floor(healthpercentage).. "%)"
+                texthealth.Visible = shared.healthEsp
+            else
+                texthealth.Visible = false
+            end
+        end)
+    end
+
+    local function p_added(p)
+        if p.Character then
+            esphealth(p,p.Character)
+        end
+        p.CharacterAdded:Connect(function(cr)
+            esphealth(p,cr)
+        end)
+    end
+
+    for i,p in next, ps:GetPlayers() do
+        if p ~= lp then
+            p_added(p)
+        end
+    end
+
+    ps.PlayerAdded:Connect(p_added)
+
+end)
+
 Refresh_Stats()
