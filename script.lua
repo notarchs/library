@@ -453,8 +453,7 @@ local labeldura = sec5b:Label("Dura:".. game.Players.LocalPlayer.Character.Human
 local labelstamstat = sec5b:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
 
 function Refresh_Stats()
-while true do 
-    wait()
+while wait() do
     labelhealth:Set("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
     labelstam:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
     labeldura:Set("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
@@ -474,12 +473,18 @@ end)
 
 local sec6b = tab6:Section("Shops")
 
-sec6b:Button("Poppa Tatoes", function(gotopoppa)
+sec6b:Dropdown("Teleport Location", {"Poppa","Stats","KNC","MuscleMania","Gym"}, "","Dropdown",function(teleportdropdown)
+shared.teleportdropDown = teleportdropdown
+print(shared.teleportdropDown)
+end)
 
-    local poppa_location = {
-        door = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625)
+sec6b:Button("Teleport To Location", function(teleporttodropdown)
+    local locations = {
+        Poppa = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625),
+        Stats = Vector3.new(-1755.63232421875, 92.55632019042969, 230.57504272460938),
+        KNC = Vector3.new(-1856.12451171875, 92.55633544921875, -21.170015335083008)
     }
-    
+
     local tween_s = game:GetService('TweenService')
     local tweeninfo = TweenInfo.new(shared.tweenSpeed,Enum.EasingStyle.Linear)
     
@@ -496,11 +501,8 @@ sec6b:Button("Poppa Tatoes", function(gotopoppa)
     end
     end
     
-    bypass_ken_shitanticheat(poppa_location.door)
+    bypass_ken_shitanticheat(locations[shared.teleportdropDown])
 end)
 
---[[sec6b:Dropdown("Teleport Location",  ,function(teleportdropdown)
-
-end)--]]
 
 Refresh_Stats()
