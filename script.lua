@@ -198,13 +198,39 @@ sec2b:Toggle("Autofarm Strength", false,"Toggle",function(SparRisk)
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
 local ws = game:GetService("Workspace")
-local Stamina = game:GetService("Players").LocalPlayer.Character.Stamina
+local Stamina = game.Players.LocalPlayer.Character.Stamina
 -- tools 
 local Tools = {"Spar Training $190", "Spar Training"}
+--- positions
+local Spar_location = {
+    NearEntrance = Vector3.new(-1680.3673095703125, 92.74633026123047, -140.79388427734375)
+}
+-- tween
+local tween_s = game:GetService('TweenService')
+    local tweeninfo = TweenInfo.new(2,Enum.EasingStyle.Linear)
+    
+    local lp = game.Players.LocalPlayer
+    
+    function sparfarm_balls(v)
+    if lp.Character and
+    lp.Character:FindFirstChild('HumanoidRootPart') then
+    
+        local cf = CFrame.new(v)
+        local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    
+        a:Play()
+        a.Completed:Wait()
+        print("Done")
+    end
+    end
+
 -- to make loop work
 shared.sparRisky = SparRisk
 -- functionality
 while shared.sparRisky and wait() do
+    if Stamina.Value <= 10 then
+        hum:Destroy()
+        end
     wait(0.1)
     if
         not plr.Backpack:FindFirstChild(Tools[2]) and shared.sparRisky and
@@ -235,11 +261,7 @@ sec2b:Toggle("Auto Dura", false,"Toggle",function(AutoDura)
     wait()
     local player = game.Players.LocalPlayer
     local char = player.Character
-for _,c in pairs(player.Character:GetDescendants())do
-if c:IsA("BasePart") then
-c.Anchored = true
-end
-end
+    player.Character.HumanoidRootPart.Anchored = true
 
 fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].Head.ClickDetector)
 
@@ -271,8 +293,6 @@ end
 	player.Character:FindFirstChild("Self Punch"):Activate()
 
 end
-
-fireclickdetector(game:GetService("Workspace").Shop["Durability Training $130"].Head.ClickDetector)
 end)
 
 local sec2c = tab2:Section("Other Risky Stuff")
@@ -526,6 +546,40 @@ sec3b:Button("Load Sharingan Spec", function(shariganspec)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/sharinganspec.lua"))()
 end)
 
+local sec3c = tab3:Section("Style Swapper")
+
+local styledropdown = sec3c:Dropdown("Your Style", {"Normal","Sumo","Woo","Pirate","Muay","Taekwondo","Wrestling","Nikoo","Niko","Van","ASumo","Marbs","Helly","KungFu","Yuri","Formless","Raishin","Mercenary","Momo","Boxing","Gaolang","Ashley","NORMAL","Booter","Hitman","Baritsu","Lethwei","Karate"},"","Dropdown", function(styleselect)
+    shared.playerStyle = styleselect
+end)
+    
+sec3c:Button("Autofind Style", function(autoselectstyle)
+        shared.autoplayerStyle = game.ReplicatedStorage.Remotes.Request:InvokeServer("Style")
+        styledropdown:Set(shared.autoplayerStyle)
+end)
+    
+local stylewanteddropdown = sec3c:Dropdown("Desired Style", {"Normal","Sumo","Woo","Pirate","Muay","Taekwondo","Wrestling","Nikoo","Niko","Van","ASumo","Marbs","Helly","KungFu","Yuri","Formless","Raishin","Mercenary","Momo","Boxing","Gaolang","Ashley","NORMAL","Booter","Hitman","Baritsu","Lethwei","Karate"},"","Dropdown", function(stylewanted)
+    shared.desiredStyle = stylewanted
+end)
+    
+sec3c:Button("Reset Style Fields", function(resetstylefields)
+        styledropdown:Set("")
+        stylewanteddropdown:Set("")
+end)
+    
+sec3c:Toggle("Force Update Style", false, "Toggle", function(forceupdatestyle)
+        -- defining some bullshit
+        local player = game:GetService("Players").LocalPlayer
+        shared.forceStyle = forceupdatestyle
+        --- function under
+        while shared.forceStyle and wait() do -- wait for the shit and make sure only does if it's on :moyai:
+            player.Backpack["Basic Combat"][shared.playerStyle].Idle.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Idle.AnimationId
+            player.Backpack["Basic Combat"][shared.playerStyle].Walk.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Walk.AnimationId
+            player.Backpack["Basic Combat"][shared.playerStyle].Punch1.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch1.AnimationId
+            player.Backpack["Basic Combat"][shared.playerStyle].Punch2.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch2.AnimationId
+            player.Backpack["Basic Combat"][shared.playerStyle].Punch3.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch3.AnimationId -- change it to your desired anim
+        end
+end)
+
 --------------------
 
 local tab4 = win:Tab("Items")
@@ -628,7 +682,8 @@ sec6b:Button("Teleport To Location", function(teleporttodropdown)
     local locations = {
         Poppa = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625),
         Stats = Vector3.new(-1755.63232421875, 92.55632019042969, 230.57504272460938),
-        KNC = Vector3.new(-1856.12451171875, 92.55633544921875, -21.170015335083008)
+        KNC = Vector3.new(-1856.12451171875, 92.55633544921875, -21.170015335083008),
+        MuscleMania = Vector3.new()
     }
 
     local tween_s = game:GetService('TweenService')
