@@ -120,7 +120,7 @@ bind:Set(state <keycode>)
 ]]
 
 --sec:Label(text <string>)
-local label = sec:Label("Label")
+--local label = sec:Label("Label")
 
 --[[
 label:Set(text <string>)
