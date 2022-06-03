@@ -478,7 +478,7 @@ sec3:Button("Rejoin Server", function()
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
 repeat wait() until game:IsLoaded() 
     syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))()')
-end); 
+end)
 wait(.5)
 game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
 end)
@@ -683,9 +683,9 @@ sec6:Slider("Tween Speed (Higher = Slower)", 1, 4, 1, 1, "Slider", function(twee
     shared.tweenSpeed = tweenspeed
 end)
 
-local sec6b = tab6:Section("Shops")
+local sec6b = tab6:Section("Locations")
 
-sec6b:Dropdown("Teleport Location", {"Poppa","Stats","KNC","MuscleMania","Gym"}, "","Dropdown",function(teleportdropdown)
+sec6b:Dropdown("Teleport Location", {"Poppa","Stats","KNC","MuscleMania","Gym","GasStation", "Arena","BaseUltimate","AHHHHPizza"}, "","Dropdown",function(teleportdropdown)
 shared.teleportdropDown = teleportdropdown
 print(shared.teleportdropDown)
 end)
@@ -695,7 +695,12 @@ sec6b:Button("Teleport To Location", function(teleporttodropdown)
         Poppa = Vector3.new(-1921.6995849609375, 92.55615997314453, 397.37603759765625),
         Stats = Vector3.new(-1755.63232421875, 92.55632019042969, 230.57504272460938),
         KNC = Vector3.new(-1856.12451171875, 92.55633544921875, -21.170015335083008),
-        MuscleMania = Vector3.new()
+        MuscleMania = Vector3.new(-2112.429931640625, 93.55634307861328, 85.65859985351562),
+        Gym = Vector3.new(-1676.2606201171875, 92.55632781982422, -113.12203216552734),
+        GasStation = Vector3.new(-1588.0750732421875, 92.67522430419922, -97.83290100097656),
+        Arena = Vector3.new(-1548.48779296875, 93.87629699707031, 135.24862670898438),
+        BaseUltimate = Vector3.new(-1721.044921875, 92.85633087158203, 136.25601196289062),
+        AHHHHPizza = Vector3.new(-1682.656494140625, 92.55632019042969, 205.62216186523438)
     }
 
     local tween_s = game:GetService('TweenService')
@@ -715,6 +720,100 @@ sec6b:Button("Teleport To Location", function(teleporttodropdown)
     end
     
     bypass_ken_shitanticheat(locations[shared.teleportdropDown])
+end)
+
+local tab7 = win:Tab("ESP")
+
+local sec7 = tab7:Section("Config")
+
+sec7:Colorpicker("Colorpicker", Color3.fromRGB(255,255,255),"Colorpicker", function(espcolour)
+    shared.espColour = espcolour
+  end)
+
+local sec7b = tab7:Section("ESP")
+
+sec7b:Toggle("Enable Name ESP", false, "Toggle", function(enablenameesp)
+
+    shared.nameEsp = enablenameesp
+    local c = workspace.CurrentCamera
+    local ps = game:GetService("Players")
+    local lp = ps.LocalPlayer
+    local rs = game:GetService("RunService")
+
+    local function esp(p,cr)
+        local h = cr:WaitForChild("Humanoid")
+        local hrp = cr:WaitForChild("HumanoidRootPart")
+
+        local text = Drawing.new("Text")
+        text.Visible = shared.nameEsp
+        text.Center = true
+        text.Outline = true
+        text.Font = 2
+        text.Color = shared.espColour
+        text.Size = 13
+
+        local c1
+        local c2
+        local c3
+
+        local function dc()
+            text.Visible = false
+            text:Remove()
+            if c1 then
+                c1:Disconnect()
+                c1 = nil
+            end
+            if c2 then
+                c2:Disconnect()
+                c2 = nil
+            end
+            if c3 then
+                c3:Disconnect()
+                c3 = nil
+            end
+        end
+
+        c2 = cr.AncestryChanged:Connect(function(_,parent)
+            if not parent then
+                dc()
+            end
+        end)
+
+        c3 = h.HealthChanged:Connect(function(v)
+            if (v<=0) or (h:GetState() == Enum.HumanoidStateType.Dead) then
+                dc()
+            end
+        end) 
+
+        c1 = rs.RenderStepped:Connect(function()
+            local hrp_pos,hrp_onscreen = c:WorldToViewportPoint(hrp.Position)
+            if hrp_onscreen then
+                text.Position = Vector2.new(hrp_pos.X, hrp_pos.Y)
+                text.Text = p.leaderstats.FirstName.Value.. " ".. p.leaderstats.ClanName.Value.. " (".. p.name.. ") "
+                text.Visible = shared.nameEsp
+            else
+                text.Visible = false
+            end
+        end)
+    end
+
+    local function p_added(p)
+        if p.Character then
+            esp(p,p.Character)
+        end
+        p.CharacterAdded:Connect(function(cr)
+            esp(p,cr)
+        end)
+    end
+
+    for i,p in next, ps:GetPlayers() do
+        if p ~= lp then
+            p_added(p)
+        end
+    end
+
+    ps.PlayerAdded:Connect(p_added)
+
 end)
 
 Refresh_Stats()
