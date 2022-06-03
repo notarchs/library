@@ -588,7 +588,9 @@ sec3c:Toggle("Force Update Style", false, "Toggle", function(forceupdatestyle)
             player.Backpack["Basic Combat"][shared.playerStyle].Walk.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Walk.AnimationId
             player.Backpack["Basic Combat"][shared.playerStyle].Punch1.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch1.AnimationId
             player.Backpack["Basic Combat"][shared.playerStyle].Punch2.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch2.AnimationId
-            player.Backpack["Basic Combat"][shared.playerStyle].Punch3.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch3.AnimationId -- change it to your desired anim
+            player.Backpack["Basic Combat"][shared.playerStyle].Punch3.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch3.AnimationId
+            player.Backpack["Basic Combat"][shared.playerStyle].Punch4.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch4.AnimationId
+            player.Backpack["Basic Combat"][shared.playerStyle].Punch5.AnimationId = player.Backpack["Basic Combat"][shared.desiredStyle].Punch5.AnimationId -- change it to your desired anim
         end
 end)
 
