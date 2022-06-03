@@ -339,21 +339,21 @@ sec2d:Toggle("Roadwork Farm", false, "Toggle", function(roadworkfarm)
     end
     
     Roadwork_Farm_balls(positions_table.Buy)
-    wait(1)
+    wait(0.2)
     fireclickdetector(game:GetService("Workspace").Shop["Roadwork Training $130"].Head.ClickDetector)
-    wait(1)
+    wait(0.2)
     game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild("Roadwork Training"))
     game.Players.LocalPlayer.Character:FindFirstChild("Roadwork Training"):Activate()
     Roadwork_Farm_balls(positions_table.Checkpoint1)
-    wait(1.5)
+    --wait(1.5)
     Roadwork_Farm_balls(positions_table.Checkpoint2)
-    wait(1.5)
+    --wait(1.5)
     Roadwork_Farm_balls(positions_table.Checkpoint3)
-    wait(1.5)
+    --wait(1.5)
     Roadwork_Farm_balls(positions_table.Checkpoint4)
-    wait(1.5)
+   -- wait(1.5)
     Roadwork_Farm_balls(positions_table.Finish)
-    wait(1.5)
+    --wait(1.5)
 
 
 end
