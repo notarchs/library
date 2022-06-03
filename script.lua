@@ -480,7 +480,7 @@ repeat wait() until game:IsLoaded()
     syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))()')
 end); 
 wait(.5)
-game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, Players.LocalPlayer)
+game:GetService('TeleportService'):TeleportToPlaceInstance(game.PlaceId, game.JobId, game:GetService("Players").LocalPlayer)
 end)
 
 sec3:Textbox("Power Output", false, function(poweroutput)
