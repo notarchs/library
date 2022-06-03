@@ -1,4 +1,4 @@
- repeat wait() until game:IsLoaded()
+repeat wait() until game:IsLoaded()
 
 local ArchsUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/lib.lua"))()
 
@@ -304,7 +304,7 @@ sec2d:Dropdown("Method", {"Regular", "Fast", "Custom"}, "Regular", "Dropdown", f
     print(shared.roadworkMethod)
 end)
 
-sec2d:Slider("Cooldown Between Checkpoints (Custom)", 1,5,1,1, "Slider", function(roadworkcustom)
+sec2d:Slider("Cooldown Between Checkpoints (Custom)", 0, 5, 0, 0.1, "Slider", function(roadworkcustom)
 
     shared.roadworkCustom = roadworkcustom
     print(shared.roadworkCustom)
@@ -397,8 +397,7 @@ while shared.roadworkFarm and wait() and shared.roadworkMethod == "Fast" do
     Roadwork_Farm_balls_fast(positions_table.Finish)
     --wait(1.5)
 end
-
-while shared.roadworkFarm and wait() and shared.roadworkMethod == "Fast" do
+while shared.roadworkFarm and wait() and shared.roadworkMethod == "Custom" do
     local tween_s = game:GetService('TweenService')
     local tweeninfo = TweenInfo.new(shared.roadworkSpeed,Enum.EasingStyle.Linear)
     
