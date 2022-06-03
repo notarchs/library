@@ -290,6 +290,75 @@ while shared.walkToggle and wait() do
     end
 end)
 
+local sec2d = tab2:Section("Auto Roadworks")
+
+sec2d:Slider("Speed (Higher = Slower)", 2,4,2,1, "Slider", function(roadworkspeed)
+
+    shared.roadworkSpeed = roadworkspeed
+    print(shared.roadworkSpeed)
+end)
+
+sec2d:Dropdown("Method", {"Regular"}, "Regular", "Dropdown", function(roadworkmethod)
+
+    shared.roadworkMethod = roadworkmethod
+    print(shared.roadworkMethod)
+end)
+
+sec2d:Toggle("Roadwork Farm", false, "Toggle", function(roadworkfarm)
+
+    shared.roadworkFarm = roadworkfarm
+    print(shared.roadworkFarm)
+
+    local positions_table = {
+        Buy = Vector3.new(-2123.05712890625, 93.9112777709961, 90.50890350341797),
+        Checkpoint1 = Vector3.new(-1991.1180419921875, 92.55632781982422, -13.291576385498047),
+        Checkpoint2 = Vector3.new(-1697.170166015625, 92.55633544921875, -32.48717498779297),
+        Checkpoint3 = Vector3.new(-1672.0970458984375, 92.55632781982422, -322.25836181640625),
+        Checkpoint4 = Vector3.new(-1917.208251953125, 92.55632781982422, -333.1876525878906),
+        Finish = Vector3.new(-1925.0443115234375, 92.55632781982422, -105.69416046142578)
+    }
+
+    while shared.roadworkFarm and wait() do
+
+    local tween_s = game:GetService('TweenService')
+    local tweeninfo = TweenInfo.new(shared.tweenSpeed,Enum.EasingStyle.Linear)
+    
+    local lp = game.Players.LocalPlayer
+    
+    function Roadwork_Farm_balls(v)
+    if lp.Character and
+    lp.Character:FindFirstChild('HumanoidRootPart') then
+    
+        local cf = CFrame.new(v)
+        local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    
+        a:Play()
+        a.Completed:Wait()
+        print("Done")
+    end
+    end
+    
+    Roadwork_Farm_balls(positions_table.Buy)
+    wait(1)
+    fireclickdetector(game:GetService("Workspace").Shop["Roadwork Training $130"].Head.ClickDetector)
+    wait(1)
+    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild("Roadwork Training"))
+    game.Players.LocalPlayer.Character:FindFirstChild("Roadwork Training"):Activate()
+    Roadwork_Farm_balls(positions_table.Checkpoint1)
+    wait(1.5)
+    Roadwork_Farm_balls(positions_table.Checkpoint2)
+    wait(1.5)
+    Roadwork_Farm_balls(positions_table.Checkpoint3)
+    wait(1.5)
+    Roadwork_Farm_balls(positions_table.Checkpoint4)
+    wait(1.5)
+    Roadwork_Farm_balls(positions_table.Finish)
+    wait(1.5)
+
+
+end
+end)
+
 local tab3 = win:Tab("Misc")
 
 local sec3 = tab3:Section("Misc stuff")
@@ -503,6 +572,5 @@ sec6b:Button("Teleport To Location", function(teleporttodropdown)
     
     bypass_ken_shitanticheat(locations[shared.teleportdropDown])
 end)
-
 
 Refresh_Stats()
