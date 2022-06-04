@@ -739,6 +739,55 @@ sec6b:Button("Teleport To Location", function(teleporttodropdown)
     bypass_ken_shitanticheat(locations[shared.teleportdropDown])
 end)
 
+local sec6c = tab6:Section("NPCS")
+
+sec6c:Dropdown("Teleport Location", {"PushupMaster","Yokozuna","KarateMaster","KnuckleMan","KureMaster","MikeMikazuchi","WrestlingMaster","MuayMaster","TaekwondoMaster","Ash","Heller","Yuri","Momo","Ariel","Van","Helly","LethweiMaster","PirateBooter","Booter"}, "","Dropdown",function(npcdropdown)
+    shared.npcdropDown = npcdropdown
+    print(shared.npcdropDown)
+end)
+
+sec6c:Button("Teleport To NPC", function(teleporttonpc)
+    local npcs = {
+        PushupMaster = Vector3.new(-2172.3, 94.2714, 82.9846),
+        Yokozuna = Vector3.new(-1592.31, 94.3206, 454.87),
+        KarateMaster = Vector3.new(-2392.4, 232.178, -916.215),
+        KnuckleMan = Vector3.new(-1734.29, 94.1778, -100.824),
+        KureMaster = Vector3.new(-2418.84, 231.646, -734.976),
+        MikeMikazuchi = Vector3.new(-1716, 105, 132.401),
+        WrestlingMaster = Vector3.new(-1583.65, 92.3214, 30.2845),
+        MuayMaster = Vector3.new(-1616.15, 93.0714, -494.465),
+        TaekwondoMaster = Vector3.new(-2128.65, 94.3214, 92.5345),
+        Ash = Vector3.new(-1905.42, 242.606, -754.831),
+        Heller = Vector3.new(-2299.96, 127.205, -101.615),
+        Yuri = Vector3.new(-2193.97, 92.5562, 425.561),
+        Momo = Vector3.new(-1358.54, 97.0063, -154.477),
+        Ariel = Vector3.new(-1492.07, 90.9092, -517.241),
+        Van = Vector3.new(-1494.43, 92.6479, -513.237),
+        Helly = Vector3.new(-1867.17, 92.5564, -229.254),
+        LethweiMaster = Vector3.new(-1777.54, 124.606, -516.361),
+        PirateBooter = Vector3.new(-10821.3, 222.309, -1943.77),
+        Booter = Vector3.new(8119.58, 64.7739, 1169.43)
+    }
+
+    local tween_s = game:GetService('TweenService')
+    local tweeninfo = TweenInfo.new(shared.tweenSpeed,Enum.EasingStyle.Linear)
+    
+    local lp = game.Players.LocalPlayer
+    
+    function bypass_ken_shitanticheat_2(v)
+    if lp.Character and
+    lp.Character:FindFirstChild('HumanoidRootPart') then
+    
+        local cf = CFrame.new(v)
+        local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+    
+        a:Play()
+    end
+    end
+    
+    bypass_ken_shitanticheat_2(npcs[shared.npcdropDown])
+end)
+
 local tab7 = win:Tab("ESP")
 
 local sec7 = tab7:Section("Config")
