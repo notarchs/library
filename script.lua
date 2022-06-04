@@ -178,7 +178,7 @@ end)
 sec2:Toggle("Toggle to punch", false,"Toggle",function(Togglepunch)
     shared.punchTog = Togglepunch
 
-    while shared.punchTog and wait(.16) do
+    while shared.punchTog and wait(.17) do
     game:GetService("Players").LocalPlayer.Backpack.zoom.boom.accion:FireServer(true, 1)
 end;
 end)
@@ -877,7 +877,7 @@ sec7b:Toggle("Enable Health ESP", false, "Toggle", function(enablehealthesp)
                 local healthpercentage = (p.Character.Humanoid.Health / p.Character.Humanoid.MaxHealth) * 100 + 0.5
                 local health1 = (p.Character.Humanoid.Health) + 0.5
                 local health2 = (p.Character.Humanoid.MaxHealth) + 0.5
-                texthealth.Position = Vector2.new(hrp_pos.X, hrp_pos.Y + 30)
+                texthealth.Position = Vector2.new(hrp_pos.X, hrp_pos.Y + 10)
                 texthealth.Text = math.floor(health1).. " / ".. math.floor(health2).. " (".. math.floor(healthpercentage).. "%)"
                 texthealth.Visible = shared.healthEsp
             else
