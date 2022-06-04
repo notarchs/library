@@ -734,7 +734,11 @@ local tab7 = win:Tab("ESP")
 
 local sec7 = tab7:Section("Config")
 
-sec7:Label("Coming soon")
+sec7:Dropdown("Esp Font", {1, 2, 3}, 2, "Dropdown", function(espfont)
+
+    shared.espFont = espfont
+
+end)
 
 local sec7b = tab7:Section("ESP")
 
@@ -754,7 +758,7 @@ sec7b:Toggle("Enable Name ESP", false, "Toggle", function(enablenameesp)
         text.Visible = shared.nameEsp
         text.Center = true
         text.Outline = true
-        text.Font = 2
+        text.Font = shared.espFont
         text.Color = Color3.fromRGB(255,255,255)
         text.Size = 13
 
@@ -841,7 +845,7 @@ sec7b:Toggle("Enable Health ESP", false, "Toggle", function(enablehealthesp)
         texthealth.Visible = shared.healthEsp
         texthealth.Center = true
         texthealth.Outline = true
-        texthealth.Font = 2
+        texthealth.Font = shared.espFont
         texthealth.Color = Color3.fromRGB(18, 247, 10)
         texthealth.Size = 13
 
@@ -928,7 +932,7 @@ sec7b:Toggle("Enable Style ESP", false, "Toggle", function(enablestyleesp)
         textstyle.Visible = shared.styleEsp
         textstyle.Center = true
         textstyle.Outline = true
-        textstyle.Font = 2
+        textstyle.Font = shared.espFont
         textstyle.Color = Color3.fromRGB(255,255,255)
         textstyle.Size = 13
 
