@@ -1,5 +1,11 @@
 repeat wait() until game:IsLoaded()
 
+local plr = game:GetService("Players").LocalPlayer
+local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
+if Char:FindFirstChild("Torso") and Char:FindFirstChild("Torso"):FindFirstChild("roblox") then
+    Char:FindFirstChild("Torso"):FindFirstChild("roblox"):Destroy()
+    end
+
 local ArchsUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/lib.lua"))()
 
 --[[ArchsUI:New({
@@ -728,9 +734,7 @@ local tab7 = win:Tab("ESP")
 
 local sec7 = tab7:Section("Config")
 
-sec7:Colorpicker("Colorpicker", Color3.fromRGB(255,255,255),"Colorpicker", function(espcolour)
-    shared.espColour = espcolour
-  end)
+sec7:Label("Coming soon")
 
 local sec7b = tab7:Section("ESP")
 
@@ -751,7 +755,7 @@ sec7b:Toggle("Enable Name ESP", false, "Toggle", function(enablenameesp)
         text.Center = true
         text.Outline = true
         text.Font = 2
-        text.Color = shared.espColour
+        text.Color = Color3.fromRGB(255,255,255)
         text.Size = 13
 
         local c1
@@ -793,6 +797,9 @@ sec7b:Toggle("Enable Name ESP", false, "Toggle", function(enablenameesp)
                 text.Position = Vector2.new(hrp_pos.X, hrp_pos.Y)
                 text.Text = p.leaderstats.FirstName.Value.. " ".. p.leaderstats.ClanName.Value.. " (".. p.name.. ") "
                 text.Visible = shared.nameEsp
+            if p.Character:FindFirstChild("Torso") and not p.Character:FindFirstChild("Torso"):FindFirstChild("roblox") then
+                text.Color = Color3.fromRGB(0, 64, 255)
+            end
             else
                 text.Visible = false
             end
@@ -904,5 +911,91 @@ sec7b:Toggle("Enable Health ESP", false, "Toggle", function(enablehealthesp)
     ps.PlayerAdded:Connect(p_added)
 
 end)
+
+sec7b:Toggle("Enable Style ESP", false, "Toggle", function(enablestyleesp)
+
+    shared.styleEsp = enablestyleesp
+    local c = workspace.CurrentCamera
+    local ps = game:GetService("Players")
+    local lp = ps.LocalPlayer
+    local rs = game:GetService("RunService")
+
+    local function espstyle(p,cr)
+        local h = cr:WaitForChild("Humanoid")
+        local hrp = cr:WaitForChild("HumanoidRootPart")
+
+        local textstyle = Drawing.new("Text")
+        textstyle.Visible = shared.styleEsp
+        textstyle.Center = true
+        textstyle.Outline = true
+        textstyle.Font = 2
+        textstyle.Color = Color3.fromRGB(255,255,255)
+        textstyle.Size = 13
+
+        local c1
+        local c2
+        local c3
+
+        local function dc()
+            textstyle.Visible = false
+            textstyle:Remove()
+            if c1 then
+                c1:Disconnect()
+                c1 = nil
+            end
+            if c2 then
+                c2:Disconnect()
+                c2 = nil
+            end
+            if c3 then
+                c3:Disconnect()
+                c3 = nil
+            end
+        end
+
+        c2 = cr.AncestryChanged:Connect(function(_,parent)
+            if not parent then
+                dc()
+            end
+        end)
+
+        c3 = h.HealthChanged:Connect(function(v)
+            if (v<=0) or (h:GetState() == Enum.HumanoidStateType.Dead) then
+                dc()
+            end
+        end) 
+
+        c1 = rs.RenderStepped:Connect(function()
+            local hrp_pos,hrp_onscreen = c:WorldToViewportPoint(hrp.Position)
+            if hrp_onscreen then
+                textstyle.Position = Vector2.new(hrp_pos.X, hrp_pos.Y + 20)
+                textstyle.Text = "Style: ".. "Loading.."
+                textstyle.Visible = shared.styleEsp
+            else
+                textstyle.Visible = false
+            end
+    end)
+    end
+
+    local function p_added(p)
+        if p.Character then
+            espstyle(p,p.Character)
+        end
+        p.CharacterAdded:Connect(function(cr)
+            espstyle(p,cr)
+        end)
+    end
+
+    for i,p in next, ps:GetPlayers() do
+        if p ~= lp then
+            p_added(p)
+        end
+    end
+
+    ps.PlayerAdded:Connect(p_added)
+
+end)
+
+
 
 Refresh_Stats()
