@@ -464,9 +464,15 @@ end)
 
 local tab3 = win:Tab("Misc")
 
+local sec3a = tab3:Section("Utility")
+
+sec3a:Button("Lag Fixer 9000", function(fixlag)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/lagfixerpro.lua"))()
+end)
+
 local sec3 = tab3:Section("Misc stuff")
 
-sec3:Button("Server Hop", function()
+sec3a:Button("Server Hop", function()
    ArchsUI:Notification("Server Hop", "Swapping Servers...") wait(2)
 
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
@@ -477,7 +483,7 @@ wait(.5)
 game:GetService('TeleportService'):Teleport(game.PlaceId)
 end)
 
-sec3:Button("Rejoin Server", function()
+sec3a:Button("Rejoin Server", function()
 
     ArchsUI:Notification("Server Rejoin", "Rejoining Server...") wait(2)
 
@@ -680,6 +686,9 @@ while wait() do
     labelstamstat:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
 end
 end
+
+local sec5c = tab5:Section("Cheat Info")
+
 
 ---
 
