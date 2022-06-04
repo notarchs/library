@@ -6,6 +6,8 @@ if Char:FindFirstChild("Torso") and Char:FindFirstChild("Torso"):FindFirstChild(
     Char:FindFirstChild("Torso"):FindFirstChild("roblox"):Destroy()
     end
 
+    local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
+
 local ArchsUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/lib.lua"))()
 
 --[[ArchsUI:New({
@@ -81,41 +83,40 @@ end)]]
  print(t)
 end)]]
 
-sec:Bind("Spar Farm (Legit)", Enum.KeyCode.RightAlt, false, "BindNormal", function(Sparfarm)
--- local
-local plr = game:GetService("Players").LocalPlayer
-local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
-local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
-local ws = game:GetService("Workspace")
--- tools 
-local Tools = {"Spar Training $190", "Spar Training"}
--- to make loop work
-if Sparfarm == true then
-    Spar = true
-    else
-        Spar = false
-end
--- function
- while Spar == true do
-       wait(0.1)
-       if not plr.Backpack:FindFirstChild(Tools[2]) and Spar == true and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Right") and not ws.Live:WaitForChild(plr.Name):FindFirstChild(Tools[2]) then
-           fireclickdetector(ws.Shop[Tools[1]].Head.ClickDetector)
-           plr.Backpack:WaitForChild(Tools[2], 5)
-       hum:EquipTool(plr.Backpack:FindFirstChild(Tools[2]))
-       mouse1click()
-       hum:EquipTool(plr.Backpack:WaitForChild("Basic Combat", 1))
-       elseif plr.Backpack:FindFirstChild(Tools[2]) and not Char:FindFirstChild("Right") then
-           hum:EquipTool(plr.Backpack:FindFirstChild(Tools[2]))
-       mouse1click()
-       wait(0.5)
-       hum:EquipTool(plr.Backpack:WaitForChild("Basic Combat", 1))
-       elseif Char:FindFirstChild("Right") then
-           mouse1click()
-       if Spar == false then
-           break
-       end
-   end
-end
+sec:Dropdown("Training", {"Pushup", "Squat"}, "", "Dropdown", function(autotrainselect)
+
+    shared.trainSelection = autotrainselect
+    print(shared.trainSelection)
+
+end)
+
+sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
+
+    local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
+    local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
+    local ws = game:GetService("Workspace")
+
+    shared.autoTrain = autotrain
+
+    while shared.autoTrain and wait() and shared.trainSelection == "Pushup" do
+        wait()
+        if not plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") then
+        fireclickdetector(ws.Shop["Pushup $100"].Head.ClickDetector)
+        hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
+        elseif plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup")
+        then hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
+        elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Training") then
+            Char:FindFirstChild("Pushup"):Activate()
+            wait(2)
+        if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Pushup") and ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Training") then
+            Char:FindFirstChild("Pushup"):Activate()
+            wait(2)
+            repeat 
+            wait()
+            until Char.Stamina.Value >= 50
+        end
+    end
+    end
 end)
   
   
@@ -466,6 +467,16 @@ local tab3 = win:Tab("Misc")
 
 local sec3a = tab3:Section("Utility")
 
+sec3a:Toggle("Noclip", false, "Toggle", function(donoclip)
+
+    shared.noClip = donoclip
+
+    if shared.noClip then
+        game.Players.LocalPlayer.Character.Humanoid:ChangeState(11)
+    end
+
+end)
+
 sec3a:Button("Lag Fixer 9000", function(fixlag)
     loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/lagfixerpro.lua"))()
 end)
@@ -696,7 +707,7 @@ local tab6 = win:Tab("Teleports")
 
 local sec6 = tab6:Section("Config")
 
-sec6:Slider("Tween Speed (Higher = Slower)", 1, 4, 1, 1, "Slider", function(tweenspeed)
+sec6:Slider("Tween Speed (Higher = Slower)", 3, 4, 3, 3, "Slider", function(tweenspeed)
     shared.tweenSpeed = tweenspeed
 end)
 
