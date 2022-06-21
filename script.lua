@@ -108,11 +108,11 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
         elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
             Char:FindFirstChild("Pushup"):Activate()
             wait(0.5)
-        if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
+        if game.Workspace.Live:WaitForChild(plr).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
             wait(2)
             repeat 
             wait()
-            until Char.Stamina >= 50
+            until game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MaxValue
     end
 end
 end
@@ -126,11 +126,11 @@ end
             elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
                 Char:FindFirstChild("Situp"):Activate()
                 wait(0.7)
-            if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
-                wait(2)
-                repeat 
-                wait()
-                until Char.Stamina >= 50
+                if game.Workspace.Live:WaitForChild(plr).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
+                    wait(2)
+                    repeat 
+                    wait()
+                    until game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MaxValue
         end
     end
 end
