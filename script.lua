@@ -105,15 +105,14 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
         hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
         elseif plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup")
         then hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
-        elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Training") then
+        elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
             Char:FindFirstChild("Pushup"):Activate()
-            wait(2)
-        if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Pushup") and ws.Live:WaitForChild(plr.Name).Status:FindFirstChild("Training") then
-            Char:FindFirstChild("Pushup"):Activate()
+            wait(0.5)
+        if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
             wait(2)
             repeat 
             wait()
-            until Char.Stamina.Value >= 50
+            until Char.Stamina >= 50
         end
     end
     end
@@ -201,7 +200,7 @@ end)
 local sec2b = tab2:Section("Risky Farms")
 
 sec2b:Toggle("Autofarm Strength", false,"Toggle",function(SparRisk)
-    local plr = game:GetService("Players").LocalPlayer
+local plr = game:GetService("Players").LocalPlayer
 local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
 local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
 local ws = game:GetService("Workspace")
@@ -325,7 +324,7 @@ sec2d:Slider("Speed (Higher = Slower)", 2,4,2,1, "Slider", function(roadworkspee
     print(shared.roadworkSpeed)
 end)
 
-sec2d:Dropdown("Method", {"Regular", "Fast", "Custom"}, "Regular", "Dropdown", function(roadworkmethod)
+sec2d:Dropdown("Method", {"Regular", "Fast", "Custom", "Test"}, "Regular", "Dropdown", function(roadworkmethod)
 
     shared.roadworkMethod = roadworkmethod
     print(shared.roadworkMethod)
@@ -460,7 +459,82 @@ while shared.roadworkFarm and wait() and shared.roadworkMethod == "Custom" do
    Roadwork_Farm_balls_Custom(positions_table.Finish)
     wait(shared.roadworkCustom)
 end
+while shared.roadworkFarm and wait() and shared.roadworkMethod == "Test" do
+    local Checkpoint_Table = {
+        Buy = Vector3.new(-2123.05712890625, 85.9112777709961, 90.50890350341797),
+        BuyLow = Vector3.new(-2123.05712890625, 55.9112777709961, 90.50890350341797),
+        Checkpoint1 = Vector3.new(-1991.1180419921875, 87.55632781982422, -13.291576385498047),
+        Checkpoint1Low = Vector3.new(-1991.1180419921875, 75.55632781982422, -13.291576385498047),
+        Checkpoint2 = Vector3.new(-1697.170166015625, 87.55633544921875, -32.48717498779297),
+        Checkpoint2Low = Vector3.new(-1697.170166015625, 75.55633544921875, -32.48717498779297),
+        Checkpoint3 = Vector3.new(-1672.0970458984375, 87.55632781982422, -322.25836181640625),
+        Checkpoint3Low = Vector3.new(-1672.0970458984375, 75.55632781982422, -322.25836181640625),
+        Checkpoint4 = Vector3.new(-1917.208251953125, 87.55632781982422, -333.1876525878906),
+        Checkpoint4Low = Vector3.new(-1917.208251953125, 75.55632781982422, -333.1876525878906),
+        Finish = Vector3.new(-1925.0443115234375, 87.55632781982422, -105.69416046142578),
+        FinishLow = Vector3.new(-1925.0443115234375, 75.55632781982422, -105.69416046142578),
+    }
+while shared.autoRoadwork and wait() do
+    
+    local tween_s = game:GetService('TweenService')
+    local tweeninfo = TweenInfo.new(0.75,Enum.EasingStyle.Linear)
 
+    local lp = game.Players.LocalPlayer
+
+    function Roadwork_Test(v)
+if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
+
+    local cf = CFrame.new(v)
+    local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, {CFrame = cf})
+
+    a:Play()
+    a.Completed:Wait()
+    print("done")
+
+end
+end
+end
+
+if Char:FindFirstChild("Head") then
+Char:FindFirstChild("Head"):Destroy()
+Roadwork_Test(Checkpoint_Table.Buy)
+wait(0.1)
+fireclickdetector(game:GetService("Workspace").Shop["Roadwork Training $130"].Head.ClickDetector)
+wait(0.2)
+lp.Character.Humanoid:EquipTool(lp.Backpack:FindFirstChild("Roadwork Training"))
+wait(0.2)
+lp.Character:FindFirstChild("Roadwork Training"):Activate()
+Roadwork_Test(Checkpoint_Table.BuyLow)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint1Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint1)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint1Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint2Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint2)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint2Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint3Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint3)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint3Low)
+wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint4Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint4)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Checkpoint4Low)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.FinishLow)
+--wait(0.2)
+Roadwork_Test(Checkpoint_Table.Finish)
+end
+end
 end)
 
 local tab3 = win:Tab("Misc")
@@ -489,7 +563,7 @@ sec3a:Button("Server Hop", function()
 game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
 repeat wait() until game:IsLoaded() 
     syn.queue_on_teleport('loadstring(game:HttpGet("https://raw.githubusercontent.com/notarchs/library/main/script.lua"))()')
-end); 
+end)
 wait(.5)
 game:GetService('TeleportService'):Teleport(game.PlaceId)
 end)
