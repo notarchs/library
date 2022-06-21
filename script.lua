@@ -83,7 +83,7 @@ end)]]
  print(t)
 end)]]
 
-sec:Dropdown("Training", {"Pushup", "Squat"}, "", "Dropdown", function(autotrainselect)
+sec:Dropdown("Training", {"Pushup", "Situp"}, "", "Dropdown", function(autotrainselect)
 
     shared.trainSelection = autotrainselect
     print(shared.trainSelection)
@@ -113,9 +113,27 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
             repeat 
             wait()
             until Char.Stamina >= 50
+    end
+end
+end
+        while shared.autoTrain and wait() and shared.trainSelection == "Situp" do
+            wait()
+            if not plr.Backpack:FindFirstChild("Situp") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") then
+            fireclickdetector(ws.Shop["Situp $300"].Head.ClickDetector)
+            hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
+            elseif plr.Backpack:FindFirstChild("Situp") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp")
+            then hum:EquipTool(plr.Backpack:WaitForChild("Situp", 1))
+            elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
+                Char:FindFirstChild("Situp"):Activate()
+                wait(0.5)
+            if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
+                wait(2)
+                repeat 
+                wait()
+                until Char.Stamina >= 50
         end
     end
-    end
+end
 end)
   
   
