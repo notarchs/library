@@ -774,7 +774,7 @@ local sec5 = tab5:Section("Info")
 local labelhealth = sec5:Label("Health: ".. game.Players.LocalPlayer.Character.Humanoid.Health.. " / ".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth)
 local labelstam = sec5:Label("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
 local labelstrength = sec5:Label("Strength: ")
-local labelmoney = sec5:Label("Money: ")
+local labelmoney = sec5:Label("Money: ".. game.Players.LocalPlayer.PlayerGui.HUD.Money)
 
 local sec5b = tab5:Section("Stats")
 
@@ -787,6 +787,7 @@ while wait() do
     labelstam:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.Value * 11.12999400457341 .. " / ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
     labeldura:Set("Dura:".. game.Players.LocalPlayer.Character.Humanoid.MaxHealth / 5.663168546662278)
     labelstamstat:Set("Stamina: ".. game.Players.LocalPlayer.Character.Stamina.MaxValue * 11.12999400457341)
+    labelmoney:Set("Money: ".. game.Players.LocalPlayer.PlayerGui.HUD.Money)
 end
 end
 
