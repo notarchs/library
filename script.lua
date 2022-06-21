@@ -109,6 +109,7 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
             Char:FindFirstChild("Pushup"):Activate()
             wait(0.5)
         if game.Workspace.Live:WaitForChild(plr.name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
+            Char:FindFirstChild("Pushup"):Activate()
             wait(2)
             repeat 
             wait()
@@ -127,6 +128,7 @@ end
                 Char:FindFirstChild("Situp"):Activate()
                 wait(0.7)
                 if game.Workspace.Live:WaitForChild(plr.name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
+                    Char:FindFirstChild("Situp"):Activate()
                     wait(2)
                     repeat 
                     wait()
