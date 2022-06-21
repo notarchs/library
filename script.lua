@@ -125,7 +125,7 @@ end
             then hum:EquipTool(plr.Backpack:WaitForChild("Situp", 1))
             elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
                 Char:FindFirstChild("Situp"):Activate()
-                wait(0.5)
+                wait(0.7)
             if ws.Live:WaitForChild(plr.Name).Stamina.Value <= 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
                 wait(2)
                 repeat 
@@ -1128,7 +1128,7 @@ sec7b:Toggle("Enable Style ESP", false, "Toggle", function(enablestyleesp)
             if (v<=0) or (h:GetState() == Enum.HumanoidStateType.Dead) then
                 dc()
             end
-        end) 
+        end)
 
         c1 = rs.RenderStepped:Connect(function()
             local hrp_pos,hrp_onscreen = c:WorldToViewportPoint(hrp.Position)
