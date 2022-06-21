@@ -122,10 +122,10 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
         elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
             Char:FindFirstChild("Pushup"):Activate()
             wait(shared.pushupSpeed)
-        while game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MinValue and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
+        while game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MinValue + 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
             repeat 
             wait(2)
-            until game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MaxValue
+            until game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MaxValue
     end
 end
 end
@@ -139,10 +139,10 @@ end
             elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
                 Char:FindFirstChild("Situp"):Activate()
                 wait(shared.situpSpeed)
-                while game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MinValue and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
+                while game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MinValue + 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
                     repeat 
                     wait()
-                    until game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MaxValue
+                    until game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MaxValue
         end
     end
 end
