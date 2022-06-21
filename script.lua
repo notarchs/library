@@ -23,6 +23,7 @@ local win = ArchsUI:New({
 local tab = win:Tab("Legit")
 
 --tab:Section(title <string>)
+local sec1 = tab:Section("Config")
 local sec = tab:Section("Legit stuff")
 
 --sec:Button(title <string>, callback <function>)
@@ -83,6 +84,19 @@ end)]]
  print(t)
 end)]]
 
+sec1:Slider("Pushup Speed", 0.5, 2, 0, 0.1, "Slider", function(pushupslider)
+
+    shared.pushupSpeed = pushupslider
+
+end)
+
+sec1:Slider("Situp Speed", 0.7, 2, 0, 0.1, "Slider", function(situpslider)
+
+    shared.situpSpeed = situpslider
+
+end)
+
+
 sec:Dropdown("Training", {"Pushup", "Situp"}, "", "Dropdown", function(autotrainselect)
 
     shared.trainSelection = autotrainselect
@@ -107,13 +121,11 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
         then hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
         elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
             Char:FindFirstChild("Pushup"):Activate()
-            wait(0.5)
-        if game.Workspace.Live:WaitForChild(plr.name).Stamina.Value <= 500 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
-            Char:FindFirstChild("Pushup"):Activate()
-            wait(2)
+            wait(shared.pushupSpeed)
+        while game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MinValue and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
             repeat 
-            wait()
-            until game.Workspace.Live:WaitForChild(plr.name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.name).Stamina.MaxValue
+            wait(2)
+            until game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MaxValue
     end
 end
 end
@@ -126,13 +138,11 @@ end
             then hum:EquipTool(plr.Backpack:WaitForChild("Situp", 1))
             elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
                 Char:FindFirstChild("Situp"):Activate()
-                wait(0.7)
-                if game.Workspace.Live:WaitForChild(plr.name).Stamina.Value <= 500 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") then
-                    Char:FindFirstChild("Situp"):Activate()
-                    wait(2)
+                wait(shared.situpSpeed)
+                while game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MinValue and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
                     repeat 
                     wait()
-                    until game.Workspace.Live:WaitForChild(plr.name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.name).Stamina.MaxValue
+                    until game.Workspace.Live:WaitForChild(plr).Stamina.Value == game.Workspace.Live:WaitForChild(plr).Stamina.MaxValue
         end
     end
 end
