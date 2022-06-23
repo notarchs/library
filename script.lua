@@ -114,6 +114,7 @@ sec1:Toggle("Auto eat protein", false, "Toggle", function(proteinyumyum)
             if player.Character:FindFirstChild("Protein Bar") then
             player.Character:FindFirstChild("Protein Bar"):Activate()
             end
+        end
     end
 
 end)
