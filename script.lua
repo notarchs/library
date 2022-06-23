@@ -96,6 +96,28 @@ sec1:Slider("Situp Speed", 0.7, 2, 0, 0.1, "Slider", function(situpslider)
 
 end)
 
+sec1:Toggle("Auto eat protein", false, "Toggle", function(proteinyumyum)
+
+    shared.proteinYummy = proteinyumyum
+    local player = game.Players.LocalPlayer
+
+    while shared.proteinYummy and wait() do
+        if not player.Character.Status:FindFirstChild("Bar") then
+            for _,c in pairs(game.Workspace.Map:GetChildren())do
+            if c:FindFirstChild("Protein Bar $45") and (c:FindFirstChild("Protein Bar $45").Head.Position - player.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 30 then
+            fireclickdetector(c:FindFirstChild("Protein Bar $45").Head.ClickDetector)
+            end
+            end
+            if player.Backpack:FindFirstChild("Protein Bar") then
+            player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Protein Bar"))
+            end
+            if player.Character:FindFirstChild("Protein Bar") then
+            player.Character:FindFirstChild("Protein Bar"):Activate()
+            end
+    end
+
+end)
+
 
 sec:Dropdown("Training", {"Pushup", "Situp"}, "", "Dropdown", function(autotrainselect)
 
@@ -124,7 +146,7 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
             elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not game.Players.LocalPlayer.Character.Status:FindFirstChild("Training") then
                 Char:FindFirstChild("Pushup"):Activate()
                 wait(shared.pushupSpeed)
-                wait(0.25)
+                wait(0.05)
             elseif game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value <= 25 then
                 repeat 
                 wait() 
@@ -143,7 +165,7 @@ end
                 elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Training") then
                     Char:FindFirstChild("Situp"):Activate()
                     wait(shared.situpSpeed)
-                    wait(0.25)
+                    wait(0.05)
                 elseif gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X <= 40 then
                     repeat 
                     wait() 
