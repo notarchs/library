@@ -148,7 +148,6 @@ end
                     repeat 
                     wait() 
                     until nil or gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X >= 230
-                end
         end
     end
 end
