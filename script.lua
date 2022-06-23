@@ -109,43 +109,106 @@ sec:Toggle("Auto Train", false, "Toggle", function(autotrain)
     local Char = plr.Character if not Char then Char = game.Workspace.Live:WaitForChild(plr) end
     local hum = Char.Humanoid or Char:WaitForChild("Humanoid")
     local ws = game:GetService("Workspace")
+    local plr = game:GetService("Players").LocalPlayer
 
     shared.autoTrain = autotrain
 
     while shared.autoTrain and wait() and shared.trainSelection == "Pushup" do
-        wait()
-        if not plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") then
-        fireclickdetector(ws.Shop["Pushup $100"].Head.ClickDetector)
-        hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
-        elseif plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup")
-        then hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
-        elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
-            Char:FindFirstChild("Pushup"):Activate()
-            wait(shared.pushupSpeed)
-        while game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MinValue + 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
-            repeat 
-            wait(2)
-            until game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MaxValue
+        if game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value >= 25 and game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value <= 9999 then
+            wait()
+            if not plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") then
+            fireclickdetector(ws.Shop["Pushup $100"].Head.ClickDetector)
+            hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
+            elseif plr.Backpack:FindFirstChild("Pushup") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup")
+            then hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
+            elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Pushup") and not game.Players.LocalPlayer.Character.Status:FindFirstChild("Training") then
+                Char:FindFirstChild("Pushup"):Activate()
+                wait(shared.pushupSpeed)
+                wait(0.25)
+            elseif game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value <= 25 then
+                repeat 
+                wait() 
+                until nil or gethiddenproperty(game.Players.LocalPlayer.PlayerGui.HUD.Stamina, "AbsoluteSize").X >= 230   
     end
 end
 end
         while shared.autoTrain and wait() and shared.trainSelection == "Situp" do
-            wait()
-            if not plr.Backpack:FindFirstChild("Situp") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") then
-            fireclickdetector(ws.Shop["Situp $300"].Head.ClickDetector)
-            hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
-            elseif plr.Backpack:FindFirstChild("Situp") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp")
-            then hum:EquipTool(plr.Backpack:WaitForChild("Situp", 1))
-            elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Pushup") and not Char.Status:FindFirstChild("Training") then
-                Char:FindFirstChild("Situp"):Activate()
-                wait(shared.situpSpeed)
-                while game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MinValue + 10 and Char.Status:FindFirstChild("Pushup") and Char.Status:FindFirstChild("Training") do
+            if game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value >= 25 and game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value <= 9999 then 
+                wait()
+                if not plr.Backpack:FindFirstChild("Situp") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") then
+                fireclickdetector(ws.Shop["Situp $300"].Head.ClickDetector)
+                hum:EquipTool(plr.Backpack:WaitForChild("Pushup", 1))
+                elseif plr.Backpack:FindFirstChild("Situp") and not ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp")
+                then hum:EquipTool(plr.Backpack:WaitForChild("Situp", 1))
+                elseif ws.Live:WaitForChild(plr.Name):FindFirstChild("Situp") and not Char.Status:FindFirstChild("Training") then
+                    Char:FindFirstChild("Situp"):Activate()
+                    wait(shared.situpSpeed)
+                    wait(0.25)
+                elseif gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X <= 40 then
                     repeat 
-                    wait()
-                    until game.Workspace.Live:WaitForChild(plr.Name).Stamina.Value == game.Workspace.Live:WaitForChild(plr.Name).Stamina.MaxValue
+                    wait() 
+                    until nil or gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X >= 230
+                end
         end
     end
 end
+end)
+
+local sec1b = tab:Section("Weights")
+
+sec1b:Toggle("Auto Heavy Weight", false, "Toggle", function(autohweight)
+
+    shared.heavyToggle = autohweight
+    local player = game.Players.LocalPlayer
+
+
+while shared.heavyToggle and wait() do
+    if gethiddenproperty(player.PlayerGui.HUD.Food, "AbsoluteSize").X >= 50.0001 then
+    if not player.Character.Status:FindFirstChild("Bar") then
+    for _,c in pairs(game.Workspace.Map:GetChildren())do
+    if c:FindFirstChild("Protein Bar $45") and (c:FindFirstChild("Protein Bar $45").Head.Position - player.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 30 then
+    fireclickdetector(c:FindFirstChild("Protein Bar $45").Head.ClickDetector)
+    end
+    end
+    if player.Backpack:FindFirstChild("Protein Bar") then
+    player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Protein Bar"))
+    end
+    if player.Character:FindFirstChild("Protein Bar") then
+    player.Character:FindFirstChild("Protein Bar"):Activate()
+    end
+    elseif not player.Character.Status:FindFirstChild("Poweraid") then
+    for _,c in pairs(game.Workspace.Map:GetChildren())do
+    if c:FindFirstChild("Energy Drink $32") and (c:FindFirstChild("Energy Drink $32").Head.Position - player.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 30 then
+    fireclickdetector(c:FindFirstChild("Energy Drink $32").Head.ClickDetector)
+    end
+    end
+    if player.Backpack:FindFirstChild("Energy Drink") then
+    player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Energy Drink"))
+    end
+    if player.Character:FindFirstChild("Energy Drink") then
+    player.Character:FindFirstChild("Energy Drink"):Activate()
+    end
+    end
+    if not game.Workspace.Live:WaitForChild(plr.Name):FindFirstChild("Heavy Weight") then
+    if player.Backpack:FindFirstChild("Heavy Weight") then
+    player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Heavy Weight"))
+    end
+    end
+    if player.Character.Stamina.Value >= 25 and player.Character.Stamina.Value <= 9999 then
+    if not player.Character.Status:FindFirstChild("Training") then
+    if game.Workspace.Live:WaitForChild(plr.Name):FindFirstChild("Heavy Weight") then
+        wait(0.1)
+    game.Workspace.Live:WaitForChild(plr.Name):FindFirstChild("Heavy Weight"):Activate()
+    end
+    end
+    wait(0.25)
+    elseif gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X <= 40 then
+    repeat 
+    wait() 
+    until nil or gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X >= 230
+            end
+        end
+    end
 end)
   
   
