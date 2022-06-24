@@ -102,7 +102,8 @@ sec1:Toggle("Auto eat protein", false, "Toggle", function(proteinyumyum)
     local player = game.Players.LocalPlayer
 
     while shared.proteinYummy and wait() do
-        if not player.Character.Status:FindFirstChild("Bar") then
+        if gethiddenproperty(player.PlayerGui.HUD.Food, "AbsoluteSize").X >= 50.0001 then
+            if not player.Character.Status:FindFirstChild("Bar") then
             for _,c in pairs(game.Workspace.Map:GetChildren())do
             if c:FindFirstChild("Protein Bar $45") and (c:FindFirstChild("Protein Bar $45").Head.Position - player.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 30 then
             fireclickdetector(c:FindFirstChild("Protein Bar $45").Head.ClickDetector)
@@ -116,7 +117,7 @@ sec1:Toggle("Auto eat protein", false, "Toggle", function(proteinyumyum)
             end
         end
     end
-
+end
 end)
 
 
@@ -610,8 +611,6 @@ end
 end
 end
 
-if Char:FindFirstChild("Head") then
-Char:FindFirstChild("Head"):Destroy()
 Roadwork_Test(Checkpoint_Table.Buy)
 wait(0.1)
 fireclickdetector(game:GetService("Workspace").Shop["Roadwork Training $130"].Head.ClickDetector)
