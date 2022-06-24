@@ -648,7 +648,6 @@ Roadwork_Test(Checkpoint_Table.FinishLow)
 --wait(0.2)
 Roadwork_Test(Checkpoint_Table.Finish)
 end
-end
 end)
 
 local tab3 = win:Tab("Misc")
