@@ -887,7 +887,7 @@ end
 
 local sec5c = tab5:Section("Cheat Info")
 
-cheat_version = 1.401
+cheat_version = 1.402
 
 local labelversion = sec5c:Label("Cheat Version: ".. cheat_version)
 
