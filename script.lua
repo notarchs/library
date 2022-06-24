@@ -590,7 +590,7 @@ while shared.roadworkFarm and wait() and shared.roadworkMethod == "Test" do
         Finish = Vector3.new(-1925.0443115234375, 87.55632781982422, -105.69416046142578),
         FinishLow = Vector3.new(-1925.0443115234375, 75.55632781982422, -105.69416046142578),
     }
-while shared.autoRoadwork and wait() do
+while shared.roadworkFarm and wait() do
     
     local tween_s = game:GetService('TweenService')
     local tweeninfo = TweenInfo.new(0.75,Enum.EasingStyle.Linear)
