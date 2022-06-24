@@ -598,14 +598,14 @@ while shared.autoRoadwork and wait() do
     local lp = game.Players.LocalPlayer
 
     function Roadwork_Test(v)
-if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
+        if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
 
-    local cf = CFrame.new(v)
-    local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, {CFrame = cf})
+        local cf = CFrame.new(v)
+        local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, {CFrame = cf})
 
-    a:Play()
-    a.Completed:Wait()
-    print("done")
+        a:Play()
+        a.Completed:Wait()
+        print("done")
 
 end
 end
