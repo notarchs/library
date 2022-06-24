@@ -590,15 +590,14 @@ while shared.roadworkFarm and wait() and shared.roadworkMethod == "Test" do
         Finish = Vector3.new(-1925.0443115234375, 87.55632781982422, -105.69416046142578),
         FinishLow = Vector3.new(-1925.0443115234375, 75.55632781982422, -105.69416046142578),
     }
-while shared.roadworkFarm and wait() do
     
-    local tween_s = game:GetService('TweenService')
-    local tweeninfo = TweenInfo.new(0.75,Enum.EasingStyle.Linear)
+local tween_s = game:GetService('TweenService')
+local tweeninfo = TweenInfo.new(0.75,Enum.EasingStyle.Linear)
 
-    local lp = game.Players.LocalPlayer
+local lp = game.Players.LocalPlayer
 
-    function Roadwork_Test(v)
-if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
+function Roadwork_Test(v)
+    if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
 
     local cf = CFrame.new(v)
     local a = tween_s:Create(lp.Character.HumanoidRootPart, tweeninfo, {CFrame = cf})
@@ -609,10 +608,7 @@ if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
 
 end
 end
-end
 
-if Char:FindFirstChild("Head") then
-Char:FindFirstChild("Head"):Destroy()
 Roadwork_Test(Checkpoint_Table.Buy)
 wait(0.1)
 fireclickdetector(game:GetService("Workspace").Shop["Roadwork Training $130"].Head.ClickDetector)
