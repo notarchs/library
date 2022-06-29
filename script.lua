@@ -110,10 +110,14 @@ sec1:Toggle("Auto eat protein", false, "Toggle", function(proteinyumyum)
             end
             end
             if player.Backpack:FindFirstChild("Protein Bar") then
+                if not player.Character.Status:FindFirstChild("Bar") then
             player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Protein Bar"))
             end
+        end
             if player.Character:FindFirstChild("Protein Bar") then
+                if not player.Character.Status:FindFirstChild("Bar") then
             player.Character:FindFirstChild("Protein Bar"):Activate()
+                end
             end
         end
     end
