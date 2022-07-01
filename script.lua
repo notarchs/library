@@ -197,25 +197,6 @@ while shared.heavyToggle and wait() do
     fireclickdetector(c:FindFirstChild("Protein Bar $45").Head.ClickDetector)
     end
     end
-    if player.Backpack:FindFirstChild("Protein Bar") then
-    player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Protein Bar"))
-    end
-    if player.Character:FindFirstChild("Protein Bar") then
-    player.Character:FindFirstChild("Protein Bar"):Activate()
-    end
-    elseif not player.Character.Status:FindFirstChild("Poweraid") then
-    for _,c in pairs(game.Workspace.Map:GetChildren())do
-    if c:FindFirstChild("Energy Drink $32") and (c:FindFirstChild("Energy Drink $32").Head.Position - player.Character:FindFirstChild("HumanoidRootPart").Position).magnitude < 30 then
-    fireclickdetector(c:FindFirstChild("Energy Drink $32").Head.ClickDetector)
-    end
-    end
-    if player.Backpack:FindFirstChild("Energy Drink") then
-    player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Energy Drink"))
-    end
-    if player.Character:FindFirstChild("Energy Drink") then
-    player.Character:FindFirstChild("Energy Drink"):Activate()
-    end
-    end
     if not game.Workspace.Live:WaitForChild(plr.Name):FindFirstChild("Heavy Weight") then
     if player.Backpack:FindFirstChild("Heavy Weight") then
     player.Character.Humanoid:EquipTool(player.Backpack:FindFirstChild("Heavy Weight"))
@@ -233,9 +214,10 @@ while shared.heavyToggle and wait() do
     repeat 
     wait() 
     until nil or gethiddenproperty(player.PlayerGui.HUD.Stamina, "AbsoluteSize").X >= 230
-            end
         end
     end
+end
+end
 end)
   
   
@@ -890,7 +872,7 @@ end
 
 local sec5c = tab5:Section("Cheat Info")
 
-cheat_version = 1.402
+cheat_version = 1.5
 
 local labelversion = sec5c:Label("Cheat Version: ".. cheat_version)
 
