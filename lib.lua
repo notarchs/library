@@ -286,6 +286,12 @@ function SolarisLib:New(Config)
     SettingsBtn.Text = "Settings"
     SettingsBtn.MouseEnter:Connect(function() TweenService:Create(SettingsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play() end)
     SettingsBtn.MouseLeave:Connect(function() TweenService:Create(SettingsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play() end)
+    local CreditsBtn = MenuBtnPreset:Clone()
+    CreditsBtn.Parent = MFrame.TopBar.ButtonHolder.MenuBtn.MenuFrame
+    CreditsBtn.Position = UDim2.new(0,0,0,45)
+    CreditsBtn.Text = "Credits"
+    CreditsBtn.MouseEnter:Connect(function() TweenService:Create(CreditsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0}):Play() end)
+    CreditsBtn.MouseLeave:Connect(function() TweenService:Create(CreditsBtn,TweenInfo.new(0.15, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{TextTransparency = 0.4}):Play() end)
 
 
     function MusicConstructor()
