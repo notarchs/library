@@ -700,6 +700,17 @@ end)
 
 local sec3b = tab3:Section("Fun Stuff")
 
+sec3b:Button("Get up(use while ragolled)", function(getup)
+    ArchsUI:Notification("Fun Features :P", "Getting up baby!!!")
+    wait()
+    local plr = game.Players.LocalPlayer
+    local chara = plr.Character:FindFirstChild("Humanoid")
+    local RagdollModule = require(game:GetService("ReplicatedStorage").RagdollModule)
+    game.ReplicatedStorage.Physics:FireServer(chara, chara, chara, "GettingUp")
+    RagdollModule:UnRagdoll(chara:ChangeState(Enum.HumanoidStateType.GettingUp))
+    ArchsUI:Notification("Fun Features :P", "YEAAA!!!")
+end)
+
 sec3b:Button("Destroy Face", function(destroyface)
     ArchsUI:Notification("Fun Features :P", "Destroying Face...")
     wait(1)
